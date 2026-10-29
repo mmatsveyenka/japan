@@ -1,0 +1,2200 @@
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<title>День 2 · Киото · 12 мая 2027</title>
+		<style>
+			@font-face {
+				font-family: 'NumSerif';
+				font-style: normal;
+				font-weight: 400 700;
+				src:
+					local('Cambria'), local('Times New Roman'), local('Noto Serif'),
+					local('Droid Serif'), local('Times');
+				unicode-range: U+0030-0039;
+			}
+			@font-face {
+				font-family: 'NumSerif';
+				font-style: italic;
+				font-weight: 400 700;
+				src:
+					local('Cambria Italic'), local('Cambria-Italic'),
+					local('Times New Roman Italic'), local('TimesNewRomanPS-ItalicMT'),
+					local('Noto Serif Italic'), local('Droid Serif Italic'), local('Times-Italic');
+				unicode-range: U+0030-0039;
+			}
+			:root {
+				--paper: #f4efe4;
+				--paper-2: #ece4d3;
+				--ink: #1e1e1e;
+				--ink-soft: #5f5a54;
+				--accent: #b4442c;
+				--navy: #26344d;
+				--gold: #c49a4a;
+				--rule: #d8cfbd;
+				--t-temple: #b4442c;
+				--t-shrine: #d2562b;
+				--t-culture: #26344d;
+				--t-street: #c49a4a;
+				--t-nature: #5e7b5a;
+				--t-modern: #6b6f7a;
+				--serif: 'NumSerif', Georgia, 'Noto Serif', 'PT Serif', serif;
+				--sans: -apple-system, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
+				--jp:
+					'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', 'MS Mincho', 'Noto Serif JP',
+					serif;
+				--jp-sans: 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+			}
+			* {
+				box-sizing: border-box;
+			}
+			html {
+				scroll-behavior: smooth;
+			}
+			body {
+				margin: 0;
+				background: var(--paper);
+				color: var(--ink);
+				font-family: var(--serif);
+				font-size: 17px;
+				line-height: 1.65;
+				font-variant-numeric: lining-nums;
+				-webkit-text-size-adjust: 100%;
+			}
+			.day,
+			#index,
+			section[id] {
+				scroll-margin-top: 12px;
+			}
+			a {
+				color: inherit;
+				text-decoration: none;
+			}
+
+			/* ---------- INDEX (4.1) ---------- */
+			#index {
+				max-width: 480px;
+				margin: 0 auto;
+				padding: 40px 22px 56px;
+			}
+			.cap {
+				font-family: var(--sans);
+				font-size: 12px;
+				text-transform: uppercase;
+				letter-spacing: 0.14em;
+				color: var(--accent);
+			}
+			.ix-title {
+				font-family: var(--serif);
+				font-style: italic;
+				font-weight: 400;
+				font-size: 44px;
+				line-height: 1.05;
+				margin: 10px 0 0;
+			}
+			.ix-jp {
+				font-family: var(--jp);
+				font-size: 26px;
+				letter-spacing: 0.1em;
+				color: var(--accent);
+				margin: 6px 0 0;
+			}
+			.ix-dates {
+				font-family: var(--serif);
+				font-style: italic;
+				font-size: 20px;
+				color: var(--ink-soft);
+				margin: 14px 0 0;
+			}
+			.ix-route {
+				font-family: var(--serif);
+				font-size: 15px;
+				line-height: 1.55;
+				color: var(--ink-soft);
+				margin: 14px 0 0;
+				padding-bottom: 22px;
+				border-bottom: 1px solid var(--rule);
+			}
+			.grid {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 10px;
+				margin-top: 26px;
+			}
+			@media (max-width: 359px) {
+				.grid {
+					grid-template-columns: repeat(2, 1fr);
+				}
+			}
+
+			.tile {
+				position: relative;
+				display: flex;
+				flex-direction: column;
+				min-height: 150px;
+				padding: 14px 10px 12px;
+				border: 1px solid var(--rule);
+				border-top: 4px solid var(--city);
+				background: transparent;
+			}
+			.tile .n {
+				font-family: var(--serif);
+				font-size: 32px;
+				line-height: 1;
+				color: var(--ink);
+			}
+			.tile .d {
+				font-family: var(--sans);
+				font-size: 12px;
+				color: var(--ink-soft);
+				margin-top: 8px;
+				line-height: 1.35;
+			}
+			.tile .c {
+				font-family: var(--serif);
+				font-size: 15px;
+				line-height: 1.2;
+				margin-top: 8px;
+				color: var(--ink);
+				overflow-wrap: anywhere;
+			}
+			.tile .j {
+				font-family: var(--jp);
+				font-size: 13px;
+				color: var(--accent);
+				margin-top: 3px;
+			}
+			.tile .s {
+				margin-top: auto;
+				padding-top: 8px;
+				font-family: var(--sans);
+				font-size: 11px;
+				text-transform: uppercase;
+				letter-spacing: 0.14em;
+				color: var(--ink-soft);
+			}
+			/* неактивная */
+			.tile.off {
+				opacity: 0.4;
+			}
+			/* активная (день готов): <div> меняется на <a href="#day-XX"> */
+			a.tile.on {
+				background: var(--paper);
+				border: 1px solid var(--ink);
+				border-top: 4px solid var(--city);
+				opacity: 1;
+				min-height: 150px;
+			}
+
+			/* ---------- DAY ---------- */
+			.day {
+				padding-bottom: 48px;
+			}
+			.in {
+				max-width: 480px;
+				margin: 0 auto;
+				padding: 0 22px;
+			}
+			.back {
+				display: inline-flex;
+				align-items: center;
+				min-height: 40px;
+				font: 13px var(--sans);
+				color: var(--navy);
+			}
+			.photo {
+				position: relative;
+				width: 100%;
+				aspect-ratio: 4/3;
+				background: var(--paper-2);
+			}
+			.photo img {
+				position: absolute;
+				inset: 0;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				display: block;
+			}
+			.ph {
+				position: absolute;
+				inset: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 28px;
+				text-align: center;
+				background: var(--paper-2);
+				border: 1px solid var(--rule);
+				font: italic 15px/1.4 var(--serif);
+				color: var(--ink-soft);
+			}
+			.city {
+				font: italic 400 42px/1.05 var(--serif);
+				margin: 6px 0 0;
+			}
+			.cjp {
+				font: 26px var(--jp);
+				letter-spacing: 0.1em;
+				color: var(--accent);
+				margin-top: 4px;
+			}
+			.lead {
+				font: italic 20px/1.4 var(--serif);
+				color: var(--ink-soft);
+				margin: 12px 0 0;
+			}
+			.cvr {
+				padding-top: 20px;
+			}
+			.plan {
+				padding-top: 44px;
+			}
+			.h-it {
+				font: italic 400 32px/1.1 var(--serif);
+				margin: 6px 0 0;
+			}
+			.plan .lead {
+				margin-bottom: 16px;
+			}
+			.row {
+				display: flex;
+				gap: 16px;
+				align-items: center;
+				padding: 16px 0;
+				border-bottom: 1px solid var(--rule);
+				min-height: 40px;
+			}
+			.row .tm {
+				flex: 0 0 64px;
+				font: 700 20px var(--sans);
+				color: var(--navy);
+			}
+			.row .tm.g {
+				color: var(--gold);
+			}
+			.row .tx {
+				flex: 1;
+			}
+			.row .nm {
+				font: 22px/1.2 var(--serif);
+			}
+			.row .jp {
+				font: 16px var(--jp);
+				color: var(--ink-soft);
+			}
+			.row .ch {
+				font-style: italic;
+				font-size: 15px;
+				color: var(--ink-soft);
+			}
+			.row .ar {
+				color: var(--rule);
+				font-size: 26px;
+			}
+			.opt {
+				display: inline-block;
+				margin-left: 8px;
+				padding: 0 7px;
+				border: 1px solid var(--accent);
+				border-radius: 999px;
+				color: var(--accent);
+				font: 11px/18px var(--sans);
+				vertical-align: middle;
+			}
+			.stop {
+				padding-top: 44px;
+				scroll-margin-top: 12px;
+			}
+			.hero {
+				position: relative;
+				margin-bottom: 44px;
+			}
+			.hero::after {
+				content: '';
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(to left, rgba(0, 0, 0, 0.35), transparent 40%);
+				pointer-events: none;
+			}
+			.plate {
+				position: absolute;
+				z-index: 2;
+				left: 22px;
+				bottom: -32px;
+				background: var(--paper-2);
+				border: 1px solid var(--rule);
+				border-left: 3px solid var(--accent);
+				box-shadow: 0 3px 14px rgba(0, 0, 0, 0.18);
+				padding: 10px 16px 8px;
+			}
+			.plate .t {
+				font: 700 32px/1.1 var(--sans);
+				color: var(--ink);
+			}
+			.vt {
+				position: absolute;
+				z-index: 2;
+				top: 16px;
+				right: 16px;
+				writing-mode: vertical-rl;
+				font: 36px/1.1 var(--jp);
+				letter-spacing: 0.08em;
+				color: rgba(255, 255, 255, 0.85);
+				text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+			}
+			.vt.sm {
+				font-size: 28px;
+			}
+			.vt.dk {
+				color: var(--navy);
+				text-shadow: none;
+			}
+			.optb {
+				position: absolute;
+				z-index: 2;
+				top: 16px;
+				left: 16px;
+				background: var(--accent);
+				color: #fff;
+				font: 11px/1 var(--sans);
+				letter-spacing: 0.14em;
+				text-transform: uppercase;
+				padding: 7px 10px;
+			}
+			.mrow {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				flex-wrap: wrap;
+			}
+			.pill {
+				color: #fff;
+				font: 11px/1 var(--sans);
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				padding: 4px 9px;
+				border-radius: 999px;
+			}
+			.nm2 {
+				font: italic 400 40px/1.05 var(--serif);
+				margin: 12px 0 0;
+			}
+			.jp2 {
+				font: 26px var(--jp);
+				letter-spacing: 0.1em;
+				color: var(--accent);
+				margin-top: 4px;
+			}
+			.ann {
+				font: italic 20px/1.4 var(--serif);
+				color: var(--ink-soft);
+				margin: 10px 0 0;
+			}
+			.btns {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 10px;
+				margin-top: 18px;
+				align-items: start;
+			}
+			.btn,
+			details.loc > summary {
+				box-sizing: border-box;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+				height: 40px;
+				padding: 0 8px;
+				border: 1px solid var(--navy);
+				color: var(--navy);
+				font: 14px var(--sans);
+				cursor: pointer;
+				list-style: none;
+				background: transparent;
+			}
+			details.loc > summary::-webkit-details-marker {
+				display: none;
+			}
+			.btns .btn {
+				grid-column: 1;
+				grid-row: 1;
+			}
+			details.loc {
+				grid-column: 1/-1;
+				grid-row: 1;
+				pointer-events: none;
+			}
+			details.loc > summary {
+				width: calc(50% - 5px);
+				margin-left: auto;
+				pointer-events: auto;
+			}
+			.lb {
+				pointer-events: auto;
+			}
+			.lb {
+				margin-top: 10px;
+				background: #fff;
+				border: 1px solid var(--rule);
+				padding: 20px;
+				text-align: center;
+			}
+			.l1 {
+				font: 44px/1.2 var(--jp);
+				color: var(--ink);
+			}
+			.l2 {
+				font: 18px var(--jp);
+				color: var(--ink-soft);
+			}
+			.l3 {
+				font: 14px var(--sans);
+			}
+			.l4 {
+				font: 15px/1.5 var(--jp);
+				color: var(--ink-soft);
+				margin-top: 6px;
+			}
+			.strip {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				margin-top: 26px;
+				border-top: 3px solid var(--ink);
+				border-bottom: 1px solid var(--rule);
+			}
+			.strip > div {
+				padding: 10px 8px 12px;
+				border-left: 1px solid var(--rule);
+			}
+			.strip > div:first-child {
+				border-left: 0;
+				padding-left: 0;
+			}
+			.strip .k {
+				font: 12px var(--sans);
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+				color: var(--ink-soft);
+			}
+			.strip .v {
+				font: 18px/1.25 var(--serif);
+				margin-top: 4px;
+			}
+			.s30 {
+				margin-top: 22px;
+				border: 1px solid var(--rule);
+				padding: 16px;
+			}
+			.s30 p {
+				margin: 10px 0 0;
+				font-size: 16px;
+				line-height: 1.5;
+			}
+			.s30 b {
+				font: 700 13px var(--sans);
+				margin-right: 6px;
+			}
+			.body p {
+				margin: 18px 0 0;
+			}
+			.drop::first-letter {
+				float: left;
+				font: italic 400 3.3em/0.82 var(--serif);
+				color: var(--accent);
+				margin: 6px 8px 0 0;
+			}
+			.sh {
+				display: flex;
+				align-items: center;
+				gap: 12px;
+				margin-top: 32px;
+			}
+			.sh::after {
+				content: '';
+				flex: 1;
+				height: 1px;
+				background: var(--rule);
+			}
+			.leg {
+				background: var(--navy);
+				color: var(--paper);
+				padding: 22px;
+				margin-top: 32px;
+			}
+			.leg .cap {
+				color: var(--gold);
+			}
+			.leg p {
+				margin: 10px 0 0;
+				font-size: 16px;
+			}
+			.hist {
+				list-style: none;
+				margin: 18px 0 0;
+				padding: 0 0 0 22px;
+				border-left: 1px solid var(--gold);
+			}
+			.hist li {
+				position: relative;
+				padding: 0 0 14px;
+				line-height: 1.45;
+			}
+			.hist li::before {
+				content: '';
+				position: absolute;
+				left: -29px;
+				top: 6px;
+				width: 10px;
+				height: 10px;
+				border: 1.5px solid var(--accent);
+				border-radius: 50%;
+				background: var(--paper);
+			}
+			.hist b {
+				font-family: var(--sans);
+				color: var(--navy);
+			}
+			.fact {
+				margin-top: 28px;
+				border-left: 3px solid var(--accent);
+				padding-left: 16px;
+			}
+			.fact p {
+				margin: 8px 0 0;
+			}
+			.find {
+				margin-top: 32px;
+			}
+			.find label {
+				display: flex;
+				gap: 12px;
+				align-items: flex-start;
+				min-height: 40px;
+				padding: 8px 0;
+				font-size: 16px;
+				line-height: 1.4;
+			}
+			.find input {
+				-webkit-appearance: none;
+				appearance: none;
+				flex: 0 0 20px;
+				width: 20px;
+				height: 20px;
+				margin: 2px 0 0;
+				border: 1.5px solid var(--accent);
+				border-radius: 0;
+				background: transparent;
+			}
+			.find input:checked {
+				background: var(--accent)
+					url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M4.5 10.5l3.5 3.5 7.5-8' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E")
+					center/16px no-repeat;
+			}
+			.find input:checked + span {
+				color: var(--ink-soft);
+				text-decoration: line-through;
+			}
+			.here {
+				background: var(--paper-2);
+				padding: 18px;
+				margin-top: 32px;
+			}
+			.here .cap {
+				color: var(--navy);
+			}
+			.here ul {
+				margin: 10px 0 0;
+				padding-left: 18px;
+			}
+			.here li {
+				margin: 6px 0;
+				font-size: 16px;
+				line-height: 1.5;
+			}
+			.way {
+				margin-top: 44px;
+				padding-top: 24px;
+				border-top: 1px solid var(--rule);
+			}
+			.way .cap {
+				color: var(--gold);
+			}
+			.way p {
+				margin: 8px 0 0;
+				font-size: 16px;
+				line-height: 1.6;
+			}
+			/* ---------- DESKTOP (от 900px; телефон не меняется) ---------- */
+			@media (min-width: 900px) {
+				#index {
+					max-width: 1100px;
+					padding: 64px 40px 80px;
+				}
+				.ix-title {
+					font-size: 64px;
+				}
+				.ix-route {
+					max-width: 760px;
+				}
+				.grid {
+					grid-template-columns: repeat(7, 1fr);
+					gap: 14px;
+				}
+				.day {
+					max-width: 1100px;
+					margin: 0 auto;
+					padding-bottom: 80px;
+				}
+				.in {
+					max-width: 1100px;
+					padding: 0 40px;
+				}
+				.photo {
+					aspect-ratio: 16/9;
+				}
+				.photo.cv {
+					aspect-ratio: 21/9;
+				}
+				.city {
+					font-size: 64px;
+				}
+				.rows {
+					display: grid;
+					grid-template-columns: 1fr 1fr;
+					column-gap: 56px;
+				}
+				.plate {
+					left: 40px;
+				}
+				.vt {
+					font-size: 44px;
+					top: 28px;
+					right: 28px;
+				}
+				.vt.sm {
+					font-size: 34px;
+				}
+				.optb {
+					top: 28px;
+					left: 28px;
+				}
+				.cols {
+					display: grid;
+					grid-template-columns: minmax(0, 400px) minmax(0, 1fr);
+					gap: 56px;
+					align-items: start;
+				}
+				.c2 .body p.drop {
+					margin-top: 0;
+				}
+				.way {
+					max-width: 640px;
+					margin-left: calc(400px + 56px);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- DAY-02 START -->
+		<section class="day" id="day-02">
+			<div class="in"><a class="back" href="#index">← Все дни</a></div>
+			<div class="photo cv">
+				<img
+					src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Yasaka-dori_early_morning_with_street_lanterns_and_the_Tower_of_Yasaka_%28Hokan-ji_Temple%29%2C_Kyoto%2C_Japan.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original"
+					alt="Улица Ясака-дори и пагода Ясака на рассвете, Киото"
+				/>
+			</div>
+			<div class="in cvr">
+				<div class="cap">День 2 · среда, 12 мая</div>
+				<h1 class="city">Киото</h1>
+				<div class="cjp">京都</div>
+				<p class="lead">
+					День начинается в храме над водопадом, идёт по улицам Хигасиямы и Гиона, а к
+					вечеру уходит на рынок Нисики и в киногородок Удзумаса.
+				</p>
+			</div>
+			<section class="in plan" id="d02-plan">
+				<div class="cap">План дня</div>
+				<h2 class="h-it">Маршрут по часам</h2>
+				<p class="lead">
+					Утро в Хигасияме, полдень в театре, день на рынке и в киногородке, вечер по
+					желанию.
+				</p>
+				<div class="rows">
+					<a class="row" href="#d02-s01"
+						><div class="tm">9:30</div>
+						<div class="tx">
+							<div class="nm">Киёмидзу-дэра</div>
+							<div class="jp">清水寺</div>
+							<div class="ch">Деревянная сцена над склоном</div>
+						</div>
+						<div class="ar">›</div></a
+					>
+					<a class="row" href="#d02-s02"
+						><div class="tm">11:00</div>
+						<div class="tx">
+							<div class="nm">Рёдзэн Каннон<span class="opt">опц.</span></div>
+							<div class="jp">霊山観音</div>
+							<div class="ch">Белая статуя, мемориал войны</div>
+						</div>
+						<div class="ar">›</div></a
+					>
+					<a class="row" href="#d02-s03"
+						><div class="tm">11:40</div>
+						<div class="tx">
+							<div class="nm">Ясака-дзиндзя</div>
+							<div class="jp">八坂神社</div>
+							<div class="ch">Святилище Гиона, фонари сцены</div>
+						</div>
+						<div class="ar">›</div></a
+					>
+					<a class="row" href="#d02-s04"
+						><div class="tm">12:45</div>
+						<div class="tx">
+							<div class="nm">GEAR</div>
+							<div class="jp">ギア</div>
+							<div class="ch">Спектакль без слов, технологии</div>
+						</div>
+						<div class="ar">›</div></a
+					>
+					<a class="row" href="#d02-s05"
+						><div class="tm">15:15</div>
+						<div class="tx">
+							<div class="nm">Рынок Нисики</div>
+							<div class="jp">錦市場</div>
+							<div class="ch">Крытая кухонная улица Киото</div>
+						</div>
+						<div class="ar">›</div></a
+					>
+					<a class="row" href="#d02-s06"
+						><div class="tm">17:30</div>
+						<div class="tx">
+							<div class="nm">Удзумаса Киото-Виллидж</div>
+							<div class="jp">太秦映画村</div>
+							<div class="ch">Декорации эпохи Эдо</div>
+						</div>
+						<div class="ar">›</div></a
+					>
+					<a class="row" href="#d02-s07"
+						><div class="tm g">вечер</div>
+						<div class="tx">
+							<div class="nm">Тэрамати и Синкёгоку<span class="opt">опц.</span></div>
+							<div class="jp">寺町・新京極</div>
+							<div class="ch">Торговые аркады центра</div>
+						</div>
+						<div class="ar">›</div></a
+					>
+					<a class="row" href="#d02-s08"
+						><div class="tm g">ночь</div>
+						<div class="tx">
+							<div class="nm">
+								Понтотё → Киямати → Камогава<span class="opt">опц.</span>
+							</div>
+							<div class="jp">先斗町・木屋町・鴨川</div>
+							<div class="ch">Огни переулков у реки</div>
+						</div>
+						<div class="ar">›</div></a
+					>
+				</div>
+			</section>
+			<article class="stop" id="d02-s01">
+				<div class="hero">
+					<div class="photo">
+						<img
+							src="https://commons.wikimedia.org/wiki/Special:FilePath/Kiyomizu-dera,_Kyoto,_November_2016_-01.jpg?width=1200"
+							alt="Главный зал и сцена Киёмидзу-дэра"
+							loading="lazy"
+						/>
+					</div>
+					<div class="vt">清水寺</div>
+					<div class="plate">
+						<div class="cap">Остановка 1 из 8</div>
+						<div class="t">9:30</div>
+					</div>
+				</div>
+				<div class="in">
+					<div class="cols">
+						<div class="c1">
+							<div class="mrow">
+								<span class="pill" style="background: var(--t-temple)">卍 храм</span
+								><span class="cap">Хигасияма · храм</span>
+							</div>
+							<h2 class="nm2">Киёмидзу-дэра</h2>
+							<div class="jp2">清水寺</div>
+							<p class="ann">
+								Деревянная сцена на высоте тринадцати метров, водопад Отова внизу и
+								склон, зелёный в мае.
+							</p>
+							<div class="btns">
+								<a
+									class="btn"
+									href="https://www.google.com/maps/search/?api=1&amp;query=Kiyomizu-dera+Kyoto"
+									target="_blank"
+									rel="noopener"
+									>📍 Открыть в Картах</a
+								>
+								<details class="loc">
+									<summary>🇯🇵 Показать местному</summary>
+									<div class="lb">
+										<div class="l1">清水寺</div>
+										<div class="l2">きよみずでら</div>
+										<div class="l3">Kiyomizu-dera</div>
+										<div class="l4">京都</div>
+									</div>
+								</details>
+							</div>
+							<div class="strip">
+								<div>
+									<div class="k">Основан</div>
+									<div class="v">778, по преданию</div>
+								</div>
+								<div>
+									<div class="k">Сцена</div>
+									<div class="v">высота 13 м</div>
+								</div>
+								<div>
+									<div class="k">ЮНЕСКО</div>
+									<div class="v">с 1994 года</div>
+								</div>
+							</div>
+							<div class="s30">
+								<div class="cap">За 30 секунд</div>
+								<p>
+									<b>Что это</b>Храм на склоне горы Отова; главный образ — Каннон
+									с одиннадцатью лицами.
+								</p>
+								<p>
+									<b>Главное</b>Сцена главного зала, вид на город и струи водопада
+									Отова внизу.
+								</p>
+								<p>
+									<b>Не пропустите</b>Зал и сцена собраны без единого гвоздя — на
+									шипах и пазах.
+								</p>
+							</div>
+						</div>
+						<div class="c2">
+							<div class="body">
+								<p class="drop">
+									Храм стоит на склоне горы Отова, и его имя — «Киёмидзу», «чистая
+									вода» — идёт от водопада, вокруг которого он вырос. По преданию,
+									храм основан в 778 году. Нынешние постройки возведены в 1633
+									году, после пожара 1629 года, на средства сёгуна Токугава
+									Иэмицу. В мае склон под сценой уже зелёный: клёны в листве,
+									вишни отцвели.
+								</p>
+								<p>
+									Главный образ храма — Каннон с одиннадцатью лицами и тысячью
+									рук. «Каннон» — бодхисаттва сострадания, «та, что слышит молитвы
+									мира»; в этом путеводителе она встретится ещё не раз. Храм
+									принадлежит школе хоссо и старше самой столицы: он был здесь до
+									основания Хэйан-кё в 794 году.
+								</p>
+								<div class="sh"><span class="cap">Сцена и зал</span></div>
+								<p>
+									«Бутай», «сцена», — терраса перед главным залом, вынесенная над
+									склоном на высоту около 13 метров. Настил лежит на деревянных
+									опорах, а весь зал вместе со сценой, как принято считать, собран
+									без гвоздей — на шипах и пазах.
+								</p>
+								<div class="sh"><span class="cap">Вода Отова</span></div>
+								<p>
+									Под залом падают три тонкие струи. Говорят, каждая приносит своё
+									желание — долголетие, успех в учёбе или удачу в любви; пить
+									принято из одной, а не из всех трёх.
+								</p>
+							</div>
+							<div class="leg">
+								<div class="cap">ЛЕГЕНДА ОСНОВАНИЯ</div>
+								<p>
+									По преданию, монах Энтин поставил у водопада Отова образ Каннон.
+									В те же годы Саканоуэ-но Тамурамаро охотился в горах на оленя:
+									ему нужно было снадобье для больной жены. Энтин убедил охотника,
+									что убийство — тяжкий грех. Тамурамаро обратился к вере в Каннон
+									и отдал свой дом под главный зал, дав храму имя. Позднее, уже
+									сёгуном, отправляясь усмирять «эмиси» — племена северо-востока,
+									он, как считается, приходил сюда молиться о победе.
+								</p>
+							</div>
+							<div class="sh"><span class="cap">История и даты</span></div>
+							<ul class="hist">
+								<li><b>778</b> — по преданию, основание храма</li>
+								<li><b>XVII в.</b> — распространяется обычай «прыжка со сцены»</li>
+								<li><b>1629</b> — пожар в храме</li>
+								<li><b>1633</b> — перестройка на средства Токугава Иэмицу</li>
+								<li>
+									<b>1994</b> — храм входит в список ЮНЕСКО «Исторические
+									памятники древнего Киото»
+								</li>
+							</ul>
+							<div class="fact">
+								<div class="cap">ФАКТ: ПРЫЖОК, СТАВШИЙ ПОСЛОВИЦЕЙ</div>
+								<p>
+									Выражение «прыгнуть со сцены Киёмидзу» до сих пор означает в
+									японском решительный, почти отчаянный шаг — примерно как «пан
+									или пропал». Корни у него в эпохе Эдо: считалось, что уцелевший
+									после прыжка с тринадцати метров получит исполнение желания.
+									Сегодня подойти к краю сцены можно, а прыгать, разумеется,
+									нельзя.
+								</p>
+							</div>
+							<div class="find">
+								<div class="cap">Найдите на месте</div>
+								<label
+									><input type="checkbox" data-k="d02-s01-1" /><span
+										>Водопад Отова — под главным залом, в конце спуска</span
+									></label
+								><label
+									><input type="checkbox" data-k="d02-s01-2" /><span
+										>Окуноин — малый зал с такой же сценой; оттуда видна
+										главная</span
+									></label
+								><label
+									><input type="checkbox" data-k="d02-s01-3" /><span
+										>Статуи Дзидзо — в малом зале рядом с Окуноином</span
+									></label
+								>
+							</div>
+							<div class="here">
+								<div class="cap">На месте</div>
+								<ul>
+									<li>
+										Заложите 60–90 минут и идите по кругу: главный зал, водопад,
+										Окуноин.
+									</li>
+									<li>
+										Внутри главного зала фотографировать нельзя: снимайте со
+										сцены и снаружи.
+									</li>
+									<li>
+										У водопада обычно очередь; к нему лучше подойти после
+										осмотра зала.
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+			<div class="in">
+				<div class="way">
+					<div class="cap">По пути → Рёдзэн Каннон</div>
+					<p>
+						Спускайтесь от Киёмидзу не по главной дороге, а по мощёным улочкам
+						Саннэндзака и Нинэндзака. Название Саннэндзака — «склон трёх лет»; по
+						поверью, упавшему здесь грозит беда в течение трёх лет, так что идти стоит
+						неторопливо. Над крышами поднимается пагода Ясака — пятиярусная башня храма
+						Хокандзи высотой 46 метров, перестроенная в 1440 году сёгуном Асикага
+						Ёсинори. Это один из символов Киото.
+					</p>
+				</div>
+			</div>
+			<article class="stop" id="d02-s02">
+				<div class="hero">
+					<div class="photo">
+						<img
+							src="https://commons.wikimedia.org/wiki/Special:FilePath/Ryozen_Kannon_temple,_Kyoto_(3811260746).jpg?width=1200"
+							alt="Статуя Рёдзэн Каннон в Киото"
+							loading="lazy"
+						/>
+					</div>
+					<div class="optb">Опционально</div>
+					<div class="vt">霊山観音</div>
+					<div class="plate">
+						<div class="cap">Остановка 2 из 8</div>
+						<div class="t">11:00</div>
+					</div>
+				</div>
+				<div class="in">
+					<div class="cols">
+						<div class="c1">
+							<div class="mrow">
+								<span class="pill" style="background: var(--t-modern)"
+									>🗼 современное</span
+								><span class="cap">Хигасияма · мемориал</span>
+							</div>
+							<h2 class="nm2">Рёдзэн Каннон</h2>
+							<div class="jp2">霊山観音</div>
+							<p class="ann">
+								Белая бетонная Каннон высотой 24 метра перед прудом и ряды
+								мемориальных табличек.
+							</p>
+							<div class="btns">
+								<a
+									class="btn"
+									href="https://www.google.com/maps/search/?api=1&amp;query=Ryozen+Kannon+Kyoto"
+									target="_blank"
+									rel="noopener"
+									>📍 Открыть в Картах</a
+								>
+								<details class="loc">
+									<summary>🇯🇵 Показать местному</summary>
+									<div class="lb">
+										<div class="l1">霊山観音</div>
+										<div class="l2">りょうぜんかんのん</div>
+										<div class="l3">Ryōzen Kannon</div>
+										<div class="l4">京都</div>
+									</div>
+								</details>
+							</div>
+							<div class="strip">
+								<div>
+									<div class="k">Открыта</div>
+									<div class="v">8 июня 1955</div>
+								</div>
+								<div>
+									<div class="k">Высота</div>
+									<div class="v">24 метра</div>
+								</div>
+								<div>
+									<div class="k">Вес</div>
+									<div class="v">около 500 т</div>
+								</div>
+							</div>
+							<div class="s30">
+								<div class="cap">За 30 секунд</div>
+								<p>
+									<b>Что это</b>Военный мемориал с бетонной статуей Каннон на
+									склоне Хигасияма.
+								</p>
+								<p>
+									<b>Главное</b>Статуя на здании мемориала; внутри таблички
+									погибших во Второй мировой.
+								</p>
+								<p>
+									<b>Не пропустите</b>Мемориальный зал 1959 года с памятником
+									неизвестному солдату.
+								</p>
+							</div>
+						</div>
+						<div class="c2">
+							<div class="body">
+								<p class="drop">
+									Статую открыли 8 июня 1955 года, через десять лет после конца
+									войны. Её воздвиг предприниматель Исикава Хиросукэ, основатель
+									автобусной и таксомоторной компании; скульптором называют
+									Ямадзаки Тёуна. Бетонная фигура весит около 500 тонн, и её видно
+									даже с верхних площадок вокзала Киото.
+								</p>
+								<p>
+									Это не храм в привычном смысле, а мемориал погибшим в
+									Тихоокеанской войне. Образ Каннон выбран как символ сострадания;
+									о ней — см. остановку 1. Статуя стоит на здании мемориала,
+									внутри которого хранятся таблички с именами.
+								</p>
+								<div class="sh"><span class="cap">Мемориал</span></div>
+								<p>
+									Под статуей находится зал с образом одиннадцатиликой Каннон и
+									табличками примерно двух миллионов японцев, погибших во Второй
+									мировой войне. Поминальную службу здесь проводят четыре раза в
+									день. Отдельный мемориальный зал, построенный в 1959 году,
+									хранит памятник неизвестному солдату; он посвящён в том числе
+									иностранным военным, погибшим под контролем японской армии.
+								</p>
+							</div>
+							<div class="sh"><span class="cap">История и даты</span></div>
+							<ul class="hist">
+								<li><b>1945</b> — окончание войны, которой посвящён мемориал</li>
+								<li>
+									<b>1946</b> — Исикава основывает компанию Тэйсан — автобусы и
+									такси
+								</li>
+								<li><b>1955</b> — 8 июня открытие статуи</li>
+								<li>
+									<b>1959</b> — построен мемориальный зал с памятником
+									неизвестному солдату
+								</li>
+							</ul>
+							<div class="fact">
+								<div class="cap">ФАКТ: ЕДИНСТВЕННЫЙ ГИГАНТ КИОТО</div>
+								<p>
+									Это единственная колоссальная статуя в Киото. Была и другая:
+									Большой Будда храма Хоко-дзи, поставленный Тоётоми Хидэёси, но
+									он давно разрушен. Каннон на склоне Хигасиямы осталась
+									единственной статуей такого масштаба в городе.
+								</p>
+							</div>
+							<div class="find">
+								<div class="cap">Найдите на месте</div>
+								<label
+									><input type="checkbox" data-k="d02-s02-1" /><span
+										>Зеркальный пруд — перед статуей, у входа</span
+									></label
+								><label
+									><input type="checkbox" data-k="d02-s02-2" /><span
+										>Чаша для благовоний — за прудом, у главной площадки</span
+									></label
+								><label
+									><input type="checkbox" data-k="d02-s02-3" /><span
+										>Памятник неизвестному солдату — в мемориальном зале</span
+									></label
+								>
+							</div>
+							<div class="here">
+								<div class="cap">На месте</div>
+								<ul>
+									<li>
+										Заложите 30–40 минут; остановка опциональна и легко
+										сокращается.
+									</li>
+									<li>Это место памяти: говорите тихо и снимайте сдержанно.</li>
+									<li>
+										Статую видно и снаружи, от Кодайдзи; если времени мало,
+										хватит взгляда с дороги.
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+			<div class="in">
+				<div class="way">
+					<div class="cap">По пути → Ясака-дзиндзя</div>
+					<p>
+						От Рёдзэн Каннон до Ясака недалеко. Рядом стоит Кодайдзи, храм 1606 года,
+						основанный вдовой Тоётоми Хидэёси, и тянется мощёная улица Нэнэ-но-мити.
+						Дальше путь идёт через парк Маруяма — старейший городской парк Киото, — за
+						которым святилище открывается с востока.
+					</p>
+				</div>
+			</div>
+			<article class="stop" id="d02-s03">
+				<div class="hero">
+					<div class="photo">
+						<img
+							src="https://commons.wikimedia.org/wiki/Special:FilePath/Nishiromon_Gate,_Yasaka_Shrine,_Kyoto,_West_view_20190416_1.jpg?width=1200"
+							alt="Ворота Нисиромон святилища Ясака"
+							loading="lazy"
+						/>
+					</div>
+					<div class="vt">八坂神社</div>
+					<div class="plate">
+						<div class="cap">Остановка 3 из 8</div>
+						<div class="t">11:40</div>
+					</div>
+				</div>
+				<div class="in">
+					<div class="cols">
+						<div class="c1">
+							<div class="mrow">
+								<span class="pill" style="background: var(--t-shrine)"
+									>⛩ святилище</span
+								><span class="cap">Гион · святилище</span>
+							</div>
+							<h2 class="nm2">Ясака-дзиндзя</h2>
+							<div class="jp2">八坂神社</div>
+							<p class="ann">
+								Алые ворота у конца улицы Сидзё, сцена с сотнями фонарей и
+								святилище, давшее Киото фестиваль Гион.
+							</p>
+							<div class="btns">
+								<a
+									class="btn"
+									href="https://www.google.com/maps/search/?api=1&amp;query=Yasaka+Shrine+Kyoto"
+									target="_blank"
+									rel="noopener"
+									>📍 Открыть в Картах</a
+								>
+								<details class="loc">
+									<summary>🇯🇵 Показать местному</summary>
+									<div class="lb">
+										<div class="l1">八坂神社</div>
+										<div class="l2">やさかじんじゃ</div>
+										<div class="l3">Yasaka-jinja</div>
+										<div class="l4">京都</div>
+									</div>
+								</details>
+							</div>
+							<div class="strip">
+								<div>
+									<div class="k">Основано</div>
+									<div class="v">656, по преданию</div>
+								</div>
+								<div>
+									<div class="k">Божество</div>
+									<div class="v">Сусаноо</div>
+								</div>
+								<div>
+									<div class="k">Праздник</div>
+									<div class="v">Гион-мацури, июль</div>
+								</div>
+							</div>
+							<div class="s30">
+								<div class="cap">За 30 секунд</div>
+								<p>
+									<b>Что это</b>Святилище бога Сусаноо в квартале Гион, у
+									восточного конца улицы Сидзё.
+								</p>
+								<p>
+									<b>Главное</b>Алые ворота Нисиромон и сцена, увешанная фонарями
+									с именами жертвователей.
+								</p>
+								<p>
+									<b>Не пропустите</b>Каменное тории на южной стороне: поставлено
+									в 1666 году, высота 9,5 метра.
+								</p>
+							</div>
+						</div>
+						<div class="c2">
+							<div class="body">
+								<p class="drop">
+									Святилище стоит там, где улица Сидзё упирается в холмы
+									Хигасиямы. До разделения синто и буддизма при Мэйдзи оно
+									называлось Гион-дзиндзя, и это имя живёт в названии квартала.
+									Нисиромон, алые ворота на западе, считается символом района и
+									охраняется как важное культурное достояние страны.
+								</p>
+								<p>
+									Главное божество — Сусаноо, герой японской мифологии; рядом
+									почитают его супругу Кусинада-химэ и восемь божеств-потомков.
+									Для Киото это не просто святилище: отсюда вышел праздник, с
+									которым связано всё летнее расписание города.
+								</p>
+								<div class="sh"><span class="cap">Гион-мацури</span></div>
+								<p>
+									Праздник проходит каждый июль: платформы «ямабоко» идут по
+									центральным улицам, а переносные святилища «микоси» выносят из
+									Ясака вечером 17 июля и возвращают 24-го. В мае праздника нет,
+									но фонари сцены несут имена его жертвователей круглый год.
+								</p>
+							</div>
+							<div class="leg">
+								<div class="cap">ПРЕДАНИЕ О ГИОНЕ</div>
+								<p>
+									По преданию, в 869 году по стране прошла эпидемия, и люди молили
+									божество Гиона о защите. Тогда выставили копья — «хоко», по
+									числу провинций тогдашней Японии, шестьдесят шесть, — и пронесли
+									по улицам переносные святилища, чтобы очистить город. Обряд
+									повторяли из года в год, копья обрастали украшениями и
+									превратились в платформы «ямабоко». Считается, что смысл обряда
+									был в том, чтобы умилостивить гневное божество, а не развлечь
+									горожан. Так, по преданию, и начался Гион-мацури.
+								</p>
+							</div>
+							<div class="sh"><span class="cap">История и даты</span></div>
+							<ul class="hist">
+								<li><b>656</b> — по преданию, начало строительства</li>
+								<li><b>869</b> — по преданию, первое шествие против эпидемии</li>
+								<li>
+									<b>876</b> — по другой версии, монах Энню из Нары ставит здесь
+									храм и почитает Сусаноо
+								</li>
+								<li><b>1666</b> — сооружено каменное тории на южной стороне</li>
+								<li>
+									<b>1871</b> — святилище получает высший государственный ранг
+									«кампэй-тайся» (до 1946 года)
+								</li>
+							</ul>
+							<div class="fact">
+								<div class="cap">ФАКТ: ФОНАРИ С ИМЕНАМИ</div>
+								<p>
+									Фонари, которыми увешаны сцена и соседние постройки, несут имена
+									жертвователей Гион-мацури. Вечером они горят и придают святилищу
+									узнаваемый вид; в 11:40 вы увидите их погашенными. Если
+									окажетесь рядом позже, взгляните на сцену ещё раз: свет меняет
+									её.
+								</p>
+							</div>
+							<div class="find">
+								<div class="cap">Найдите на месте</div>
+								<label
+									><input type="checkbox" data-k="d02-s03-1" /><span
+										>Нисиромон — алые ворота в конце улицы Сидзё</span
+									></label
+								><label
+									><input type="checkbox" data-k="d02-s03-2" /><span
+										>Сцена с фонарями — перед главным залом</span
+									></label
+								><label
+									><input type="checkbox" data-k="d02-s03-3" /><span
+										>Эки-дзиндзя — малое святилище защиты от поветрий</span
+									></label
+								><label
+									><input type="checkbox" data-k="d02-s03-4" /><span
+										>Уцукуси-гозэнся — малое святилище красоты, ищите по
+										табличке</span
+									></label
+								>
+							</div>
+							<div class="here">
+								<div class="cap">На месте</div>
+								<ul>
+									<li>
+										Заложите 30–40 минут; из парка Маруяма вы входите с востока.
+									</li>
+									<li>
+										Нисиромон осмотрите при выходе, на западе, у улицы Сидзё.
+									</li>
+									<li>
+										Перед главным залом по обычаю синто: два поклона, два
+										хлопка, поклон.
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+			<article class="stop" id="d02-s04">
+				<div class="hero">
+					<div class="photo">
+						<img
+							src="https://commons.wikimedia.org/wiki/Special:FilePath/1928_Building,_Kyoto_01.jpg?width=1200"
+							alt="Здание «1928» в Киото, где идёт GEAR"
+							loading="lazy"
+						/>
+					</div>
+					<div class="vt">ギア</div>
+					<div class="plate">
+						<div class="cap">Остановка 4 из 8</div>
+						<div class="t">12:45</div>
+					</div>
+				</div>
+				<div class="in">
+					<div class="cols">
+						<div class="c1">
+							<div class="mrow">
+								<span class="pill" style="background: var(--t-culture)"
+									>🎭 культура</span
+								><span class="cap">Накагё · театр</span>
+							</div>
+							<h2 class="nm2">GEAR</h2>
+							<div class="jp2">ギア</div>
+							<p class="ann">
+								Спектакль без слов в здании 1928 года: роботы, пантомима, танец и
+								проекции в зале на 72 места.
+							</p>
+							<div class="btns">
+								<a
+									class="btn"
+									href="https://www.google.com/maps/search/?api=1&amp;query=GEAR+Non-Verbal+Theatre+Kyoto"
+									target="_blank"
+									rel="noopener"
+									>📍 Открыть в Картах</a
+								>
+								<details class="loc">
+									<summary>🇯🇵 Показать местному</summary>
+									<div class="lb">
+										<div class="l1">ギア</div>
+										<div class="l2">ぎあ</div>
+										<div class="l3">GEAR · ART COMPLEX 1928</div>
+										<div class="l4">
+											京都<br />〒604-8082
+											京都市中京区三条御幸町東南角弁慶石町56 1928ビル3階
+										</div>
+									</div>
+								</details>
+							</div>
+							<div class="strip">
+								<div>
+									<div class="k">Идёт с</div>
+									<div class="v">апреля 2012 года</div>
+								</div>
+								<div>
+									<div class="k">Здание</div>
+									<div class="v">1928, арт-деко</div>
+								</div>
+								<div>
+									<div class="k">Зал</div>
+									<div class="v">72 места</div>
+								</div>
+							</div>
+							<div class="s30">
+								<div class="cap">За 30 секунд</div>
+								<p>
+									<b>Что это</b>Долгоиграющий спектакль без слов о роботах на
+									заброшенной фабрике игрушек.
+								</p>
+								<p>
+									<b>Главное</b>Каждый робот раскрывает талант: пантомима,
+									жонглирование, брейк-данс, фокусы.
+								</p>
+								<p>
+									<b>Не пропустите</b>Само здание 1928 года работы Такэды Гоити:
+									окна и балкон арт-деко.
+								</p>
+							</div>
+						</div>
+						<div class="c2">
+							<div class="body">
+								<p class="drop">
+									GEAR («ギア», «шестерня») идёт в Киото с апреля 2012 года и
+									считается первым в Японии долгоиграющим спектаклем без слов. Его
+									играют на третьем этаже здания «1928» у перекрёстка Сандзё и
+									Гокомати, в зале на 72 места: сцена здесь совсем рядом со
+									зрителем.
+								</p>
+								<p>
+									Действие происходит в будущем, на сломанной фабрике игрушек.
+									Четыре робота-рабочих встречают куклу, прикосновение которой
+									открывает в каждом особый дар. Спектакль придумал Кохара Кэйто,
+									работавший в театре кабуки, и приёмы кабуки в нём заметны —
+									быстрые смены костюмов и акробатика; пения нет.
+								</p>
+								<div class="sh"><span class="cap">Здание «1928»</span></div>
+								<p>
+									Здание построено в 1928 году по проекту Такэды Гоити как
+									киотоское бюро газеты «Осака майнити». Фасад и звёздчатый балкон
+									выполнены в духе арт-деко, а сам дом внесён в реестр
+									материальных культурных ценностей города Киото. Когда его
+									собирались снести, архитектор купил дом и поручил Кохаре
+									обустроить в нём театр; в 1999 году здесь открылся Art Complex
+									1928.
+								</p>
+							</div>
+							<div class="sh"><span class="cap">История и даты</span></div>
+							<ul class="hist">
+								<li>
+									<b>1928</b> — построено здание «1928» по проекту Такэды Гоити
+								</li>
+								<li><b>1999</b> — в здании открывается театр Art Complex 1928</li>
+								<li>
+									<b>2010</b> — пробные показы GEAR; с тех пор в спектакле важен
+									проекционный маппинг
+								</li>
+								<li>
+									<b>2012</b> — с апреля GEAR идёт как долгоиграющий спектакль
+								</li>
+							</ul>
+							<div class="fact">
+								<div class="cap">ФАКТ: ШЕСТЕРЁНКИ РАЗНОЙ ФОРМЫ</div>
+								<p>
+									Название объясняют так: несколько шестерёнок разной формы,
+									сцепившись, создают большую силу. Отсюда, считается, и отказ от
+									слов: гармония строится на движении, музыке и свете. Каждую роль
+									играют несколько артистов по очереди, поэтому составы на разных
+									сеансах различаются.
+								</p>
+							</div>
+							<div class="find">
+								<div class="cap">Найдите на месте</div>
+								<label
+									><input type="checkbox" data-k="d02-s04-1" /><span
+										>Окна и балкон арт-деко — на фасаде здания «1928»</span
+									></label
+								><label
+									><input type="checkbox" data-k="d02-s04-2" /><span
+										>Зал на третьем этаже — вход через само здание</span
+									></label
+								><label
+									><input type="checkbox" data-k="d02-s04-3" /><span
+										>Проекции на декорациях — во время спектакля</span
+									></label
+								>
+							</div>
+							<div class="here">
+								<div class="cap">На месте</div>
+								<ul>
+									<li>
+										Расписание и бронирование проверьте на официальном сайте до
+										визита.
+									</li>
+									<li>
+										Спектакль идёт около 90 минут; следующая остановка — рынок в
+										15:15.
+									</li>
+									<li>
+										Язык не нужен; приходите немного заранее: зал небольшой,
+										сцена близко.
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+			<div class="in">
+				<div class="way">
+					<div class="cap">По пути → Рынок Нисики</div>
+					<p>
+						От здания «1928» до рынка идти на юг по аркаде Тэрамати: она начинается
+						квартал западнее, а Нисики упирается в неё в нескольких сотнях метров. После
+						GEAR остаётся около часа: его хватит на обед и неторопливую прогулку.
+						Тэрамати — «храмовый город» Хидэёси; о нём подробнее в вечерней остановке 7.
+					</p>
+				</div>
+			</div>
+			<article class="stop" id="d02-s05">
+				<div class="hero">
+					<div class="photo">
+						<img
+							src="https://commons.wikimedia.org/wiki/Special:FilePath/Nishiki_market_Kyoto_hdsr_2019_06_02_9999_129.jpg?width=1200"
+							alt="Крытая улица рынка Нисики в Киото"
+							loading="lazy"
+						/>
+					</div>
+					<div class="vt">錦市場</div>
+					<div class="plate">
+						<div class="cap">Остановка 5 из 8</div>
+						<div class="t">15:15</div>
+					</div>
+				</div>
+				<div class="in">
+					<div class="cols">
+						<div class="c1">
+							<div class="mrow">
+								<span class="pill" style="background: var(--t-street)"
+									>🍢 улица / рынок</span
+								><span class="cap">Накагё · рынок</span>
+							</div>
+							<h2 class="nm2">Рынок Нисики</h2>
+							<div class="jp2">錦市場</div>
+							<p class="ann">
+								Крытая улица шириной меньше четырёх метров, около ста тридцати лавок
+								и святилище в конце ряда.
+							</p>
+							<div class="btns">
+								<a
+									class="btn"
+									href="https://www.google.com/maps/search/?api=1&amp;query=Nishiki+Market+Kyoto"
+									target="_blank"
+									rel="noopener"
+									>📍 Открыть в Картах</a
+								>
+								<details class="loc">
+									<summary>🇯🇵 Показать местному</summary>
+									<div class="lb">
+										<div class="l1">錦市場</div>
+										<div class="l2">にしきいちば</div>
+										<div class="l3">Nishiki Market</div>
+										<div class="l4">京都</div>
+									</div>
+								</details>
+							</div>
+							<div class="strip">
+								<div>
+									<div class="k">Длина</div>
+									<div class="v">около 390 м</div>
+								</div>
+								<div>
+									<div class="k">Ширина</div>
+									<div class="v">3,9 м</div>
+								</div>
+								<div>
+									<div class="k">Лавок</div>
+									<div class="v">около 130</div>
+								</div>
+							</div>
+							<div class="s30">
+								<div class="cap">За 30 секунд</div>
+								<p>
+									<b>Что это</b>Крытая рыночная улица в центре Киото, прозванная
+									«кухней города».
+								</p>
+								<p>
+									<b>Главное</b>Овощи, маринады «цукэмоно», тофу, рыба и ножи —
+									всё под одной крышей.
+								</p>
+								<p>
+									<b>Не пропустите</b>Святилище Нисики-тэммангу в восточном конце
+									ряда, увешанное фонарями.
+								</p>
+							</div>
+						</div>
+						<div class="c2">
+							<div class="body">
+								<p class="drop">
+									Нисики тянется по улице Нисикикодзи, на квартал севернее Сидзё,
+									от Тэрамати на востоке до Такакуры на западе. Длина ряда около
+									390 метров, ширина всего 3,9; сегодня в нём около 130 лавок.
+									Брусчатку здесь уложили в 1984 году, крышу над рядом поставили в
+									1993-м.
+								</p>
+								<p>
+									Рынок вырос из рыбной торговли: в 1615 году сёгунат официально
+									признал его рыбным рынком, а по одной из версий торговали здесь
+									уже в IX веке. Холодная подземная вода помогала хранить рыбу, и
+									репутация закрепилась. Сегодня тут продают овощи, «цукэмоно» —
+									маринады, тофу, «юбу» — плёнку из соевого молока, сушёную рыбу и
+									ножи лавок, которым больше 450 лет.
+								</p>
+								<div class="sh"><span class="cap">Что пробовать</span></div>
+								<p>
+									Идти сюда стоит не за покупками, а за закусками: рыба, тофу,
+									«обандзай» — домашняя кухня Киото, маринады. Многие лавки держат
+									семьи по несколько поколений. Выберите две-три и не пытайтесь
+									обойти весь ряд.
+								</p>
+								<div class="sh"><span class="cap">Нисики-тэммангу</span></div>
+								<p>
+									В восточном конце ряда стоит святилище, основанное в 1003 году и
+									посвящённое учёному Сугавара-но Митидзанэ — божеству учёбы.
+									Перед ним лежит священный бык «синъю»; считается, что
+									прикосновение к его рогу приносит удачу.
+								</p>
+							</div>
+							<div class="sh"><span class="cap">История и даты</span></div>
+							<ul class="hist">
+								<li><b>782</b> — по одной из версий, здесь уже торговали рыбой</li>
+								<li><b>1003</b> — основано святилище Нисики-тэммангу</li>
+								<li><b>1615</b> — сёгунат признаёт рынок рыбным</li>
+								<li>
+									<b>1927</b> — открыт Центральный оптовый рынок, часть лавок
+									уходит туда
+								</li>
+								<li><b>1984</b> — улица вымощена брусчаткой</li>
+								<li><b>1993</b> — над рядом поставлена крыша</li>
+							</ul>
+							<div class="fact">
+								<div class="cap">ФАКТ: ХОЛОДНАЯ ВОДА ПОД РЫНКОМ</div>
+								<p>
+									Нисики вырос там, где грунтовые воды холодны: они помогали
+									сохранять рыбу свежей до появления холодильников. Для города
+									вдали от моря это имело решающее значение, и репутация рынка
+									закреплялась столетиями. Прозвище «кухня Киото» появилось позже,
+									в 1928 году, когда новое объединение лавок добавило фрукты,
+									овощи и мясо.
+								</p>
+							</div>
+							<div class="find">
+								<div class="cap">Найдите на месте</div>
+								<label
+									><input type="checkbox" data-k="d02-s05-1" /><span
+										>Святилище Нисики-тэммангу — в восточном конце ряда, у
+										Синкёгоку</span
+									></label
+								><label
+									><input type="checkbox" data-k="d02-s05-2" /><span
+										>Синъю, священный бык у святилища — рог трогают на
+										удачу</span
+									></label
+								><label
+									><input type="checkbox" data-k="d02-s05-3" /><span
+										>Маринады «цукэмоно» — лавки по обе стороны ряда</span
+									></label
+								>
+							</div>
+							<div class="here">
+								<div class="cap">На месте</div>
+								<ul>
+									<li>
+										Заложите около часа; ряд узкий, идите по одной стороне и
+										возвращайтесь по другой.
+									</li>
+									<li>
+										Есть на ходу в тесноте неудобно: отойдите к лавке или
+										встаньте у стены.
+									</li>
+									<li>
+										Основная толпа обычно в обеденные часы, поэтому 15:15 —
+										удобное время.
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+			<article class="stop" id="d02-s06">
+				<div class="hero">
+					<div class="photo">
+						<img
+							src="https://commons.wikimedia.org/wiki/Special:FilePath/130706_Toei_Kyoto_Studio_Park_Kyoto_Japan01s3.jpg?width=1200"
+							alt="Декорации эпохи Эдо в киногородке Удзумаса"
+							loading="lazy"
+						/>
+					</div>
+					<div class="vt">太秦映画村</div>
+					<div class="plate">
+						<div class="cap">Остановка 6 из 8</div>
+						<div class="t">17:30</div>
+					</div>
+				</div>
+				<div class="in">
+					<div class="cols">
+						<div class="c1">
+							<div class="mrow">
+								<span class="pill" style="background: var(--t-culture)"
+									>🎭 культура</span
+								><span class="cap">Укё · киногородок</span>
+							</div>
+							<h2 class="nm2">Удзумаса Киото-Виллидж</h2>
+							<div class="jp2">太秦映画村</div>
+							<p class="ann">
+								Улицы эпохи Эдо с мостом Нихонбаси, самурайский дом и студия, где
+								снимают исторические драмы.
+							</p>
+							<div class="btns">
+								<a
+									class="btn"
+									href="https://www.google.com/maps/search/?api=1&amp;query=Uzumasa+Kyoto+Village+Kyoto"
+									target="_blank"
+									rel="noopener"
+									>📍 Открыть в Картах</a
+								>
+								<details class="loc">
+									<summary>🇯🇵 Показать местному</summary>
+									<div class="lb">
+										<div class="l1">太秦映画村</div>
+										<div class="l2">うずまさえいがむら</div>
+										<div class="l3">Uzumasa Kyoto Village</div>
+										<div class="l4">京都<br />京都市右京区太秦東蜂岡町10</div>
+									</div>
+								</details>
+							</div>
+							<div class="strip">
+								<div>
+									<div class="k">Открыт</div>
+									<div class="v">1 ноября 1975</div>
+								</div>
+								<div>
+									<div class="k">Площадь</div>
+									<div class="v">около 5,3 га</div>
+								</div>
+								<div>
+									<div class="k">Съёмок</div>
+									<div class="v">свыше 200 в год</div>
+								</div>
+							</div>
+							<div class="s30">
+								<div class="cap">За 30 секунд</div>
+								<p>
+									<b>Что это</b>Киногородок студии Тоэй с декорациями Эдо;
+									единственный в Японии парк «дзидайгэки».
+								</p>
+								<p>
+									<b>Главное</b>Улицы Эдо, мост Нихонбаси и самурайская усадьба,
+									знакомые по сериалам.
+								</p>
+								<p>
+									<b>Не пропустите</b>Съёмочную площадку: на декорациях могут идти
+									настоящие съёмки.
+								</p>
+							</div>
+						</div>
+						<div class="c2">
+							<div class="body">
+								<p class="drop">
+									Киногородок — часть студии Тоэй: кино в Удзумасе снимают с 1926
+									года. Для публики декорации открыли 1 ноября 1975 года, когда
+									киноиндустрию, называвшуюся «японским Голливудом», уже теснило
+									телевидение. За первые три дня пришло больше 70 тысяч человек.
+								</p>
+								<p>
+									С 28 марта 2026 года парк работает под названием «Удзумаса
+									Киото-Виллидж»: после первой очереди обновления он стал
+									«взрослым» погружением в Киото эпохи Эдо, а время закрытия
+									сдвинули на вечер. Прежнее имя «Тоэй Киото Стадио Парк» ещё
+									встречается на картах и в путеводителях. «Дзидайгэки» —
+									исторические драмы, ради которых всё это построено.
+								</p>
+								<div class="sh"><span class="cap">Что внутри</span></div>
+								<p>
+									Декорации воссоздают порт, площадь, улицу Сиракабэ, постоялые
+									дворы, чайные и городские дома «матия». Есть копия моста
+									Нихонбаси, здание суда эпохи Эдо, самурайская усадьба и
+									полицейская будка эпохи Мэйдзи, а также улица Ёсивара. Из
+									развлечений — представления про ниндзя и «ёкай», прокат костюмов
+									самурая и «ойран» — куртизанки высшего ранга.
+								</p>
+							</div>
+							<div class="sh"><span class="cap">История и даты</span></div>
+							<ul class="hist">
+								<li><b>1926</b> — на этом месте начинает работать киностудия</li>
+								<li><b>1975</b> — 1 ноября парк открывается для публики</li>
+								<li><b>2025</b> — к 50-летию объявлено масштабное обновление</li>
+								<li>
+									<b>2026</b> — 28 марта открывается первая очередь, парк получает
+									новое имя
+								</li>
+							</ul>
+							<div class="fact">
+								<div class="cap">ФАКТ: ПАРК, ГДЕ СНИМАЮТ ПО-НАСТОЯЩЕМУ</div>
+								<p>
+									Декорации Эдо здесь — рабочая площадка, на которой снимают
+									больше двухсот проектов в год. Парк называют единственным в
+									Японии, где можно наблюдать за съёмками «дзидайгэки» своими
+									глазами. Поэтому в кадре иногда оказывается не только реквизит,
+									но и съёмочная группа.
+								</p>
+							</div>
+							<div class="find">
+								<div class="cap">Найдите на месте</div>
+								<label
+									><input type="checkbox" data-k="d02-s06-1" /><span
+										>Копия моста Нихонбаси — среди декораций Эдо</span
+									></label
+								><label
+									><input type="checkbox" data-k="d02-s06-2" /><span
+										>Улица Сиракабэ — белые стены в стиле Эдо</span
+									></label
+								><label
+									><input type="checkbox" data-k="d02-s06-3" /><span
+										>Улица Ёсивара — воссозданный квартал развлечений Эдо</span
+									></label
+								>
+							</div>
+							<div class="here">
+								<div class="cap">На месте</div>
+								<ul>
+									<li>
+										Заложите около трёх часов и выберите главное: улицы Эдо и
+										представления.
+									</li>
+									<li>
+										Часы работы и вечерние программы проверьте перед визитом:
+										после обновления они менялись.
+									</li>
+									<li>
+										Прокат костюмов — отдельная услуга; решите заранее, нужен ли
+										он.
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+			<article class="stop" id="d02-s07">
+				<div class="hero">
+					<div class="photo">
+						<img
+							src="https://commons.wikimedia.org/wiki/Special:FilePath/Teramachi_shopping_street,_Kyoto,_May_2017.jpg?width=1200"
+							alt="Крытая аркада Тэрамати в Киото"
+							loading="lazy"
+						/>
+					</div>
+					<div class="optb">Опционально</div>
+					<div class="vt">寺町新京極</div>
+					<div class="plate">
+						<div class="cap">Остановка 7 из 8</div>
+						<div class="t">ВЕЧЕР</div>
+					</div>
+				</div>
+				<div class="in">
+					<div class="cols">
+						<div class="c1">
+							<div class="mrow">
+								<span class="pill" style="background: var(--t-street)"
+									>🍢 улица / рынок</span
+								><span class="cap">Накагё · аркады</span>
+							</div>
+							<h2 class="nm2">Тэрамати и Синкёгоку</h2>
+							<div class="jp2">寺町・新京極</div>
+							<p class="ann">
+								Две крытые аркады в квартале друг от друга: бывший храмовый город и
+								улица, созданная в 1872 году.
+							</p>
+							<div class="btns">
+								<a
+									class="btn"
+									href="https://www.google.com/maps/search/?api=1&amp;query=Shinkyogoku+Shopping+Street+Kyoto"
+									target="_blank"
+									rel="noopener"
+									>📍 Открыть в Картах</a
+								>
+								<details class="loc">
+									<summary>🇯🇵 Показать местному</summary>
+									<div class="lb">
+										<div class="l1">寺町・新京極</div>
+										<div class="l2">てらまち・しんきょうごく</div>
+										<div class="l3">Teramachi & Shinkyogoku</div>
+										<div class="l4">京都</div>
+									</div>
+								</details>
+							</div>
+							<div class="strip">
+								<div>
+									<div class="k">Длина</div>
+									<div class="v">около 500 м</div>
+								</div>
+								<div>
+									<div class="k">Тэрамати</div>
+									<div class="v">с 1590 года</div>
+								</div>
+								<div>
+									<div class="k">Синкёгоку</div>
+									<div class="v">с 1872 года</div>
+								</div>
+							</div>
+							<div class="s30">
+								<div class="cap">За 30 секунд</div>
+								<p>
+									<b>Что это</b>Две параллельные крытые торговые улицы между
+									Сандзё и Сидзё.
+								</p>
+								<p>
+									<b>Главное</b>Магазины, кафе и храмы среди витрин; Тэрамати
+									старше, Синкёгоку развлекательнее.
+								</p>
+								<p>
+									<b>Не пропустите</b>Храм Сэйганзи с восьмигранным залом и
+									святилище Нисики-тэммангу на Синкёгоку.
+								</p>
+							</div>
+						</div>
+						<div class="c2">
+							<div class="body">
+								<p class="drop">
+									«Тэрамати» значит «храмовый город»: около 1590 года Тоётоми
+									Хидэёси велел перенести сюда многие храмы Киото, по записям их
+									было около восьмидесяти. Лавки появились позже, когда в эпоху
+									Мэйдзи монастыри потеряли часть влияния и вокруг них стали
+									торговать местными ремёслами.
+								</p>
+								<p>
+									Синкёгоку возник в 1872 году: после переезда императора в Токио
+									город искал, чем поднять дух жителей, и бывший храмовый участок
+									превратили в улицу развлечений. Сегодня обе аркады под крышей, а
+									на участке от Сандзё до Сидзё днём не ездят машины.
+								</p>
+								<div class="sh"><span class="cap">Храмы среди витрин</span></div>
+								<p>
+									На Тэрамати стоят храмы Хоннодзи и Сэйганзи, а на Синкёгоку —
+									около десятка храмов и святилищ, среди них Нисики-тэммангу,
+									Торая-якуси и Такоякуси-до. Это следы бывшего храмового города,
+									зажатые между витринами.
+								</p>
+							</div>
+							<div class="sh"><span class="cap">История и даты</span></div>
+							<ul class="hist">
+								<li><b>1590</b> — Хидэёси переносит храмы на Тэрамати</li>
+								<li>
+									<b>1868</b> — после переезда столицы в Токио храмы теряют
+									влияние
+								</li>
+								<li>
+									<b>1868–1912</b> — на Тэрамати появляются первые лавки с
+									местными ремёслами
+								</li>
+								<li><b>1872</b> — создана улица Синкёгоку</li>
+							</ul>
+							<div class="fact">
+								<div class="cap">ФАКТ: ДВЕ УЛИЦЫ, ОДИН ЛАБИРИНТ</div>
+								<p>
+									Тэрамати и Синкёгоку идут рядом и образуют единый «лабиринт» для
+									прогулки под крышей. Старший Тэрамати сохраняет магазины
+									традиционных товаров, а младший Синкёгоку отдан сувенирам, играм
+									и закусочным.
+								</p>
+							</div>
+							<div class="find">
+								<div class="cap">Найдите на месте</div>
+								<label
+									><input type="checkbox" data-k="d02-s07-1" /><span
+										>Храм Сэйганзи — на Тэрамати, ищите восьмигранный зал</span
+									></label
+								><label
+									><input type="checkbox" data-k="d02-s07-2" /><span
+										>Нисики-тэммангу — на Синкёгоку, в восточном конце
+										Нисики</span
+									></label
+								><label
+									><input type="checkbox" data-k="d02-s07-3" /><span
+										>Такоякуси-до — на Синкёгоку, у улицы Такоякуси</span
+									></label
+								>
+							</div>
+							<div class="here">
+								<div class="cap">На месте</div>
+								<ul>
+									<li>
+										Заложите 40–60 минут; это вечерняя остановка, её легко
+										сократить.
+									</li>
+									<li>
+										Идите по Тэрамати на юг до Сидзё, а возвращайтесь по
+										Синкёгоку: так увидите обе улицы.
+									</li>
+									<li>Часы работы храмов и святилищ проверьте перед визитом.</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+			<article class="stop" id="d02-s08">
+				<div class="hero">
+					<div class="photo">
+						<img
+							src="https://commons.wikimedia.org/wiki/Special:FilePath/Pontocho_alleyway_(48743678216).jpg?width=1200"
+							alt="Переулок Понтотё с фонарями в Киото"
+							loading="lazy"
+						/>
+					</div>
+					<div class="optb">Опционально</div>
+					<div class="vt">先斗町</div>
+					<div class="plate">
+						<div class="cap">Остановка 8 из 8</div>
+						<div class="t">НОЧЬ</div>
+					</div>
+				</div>
+				<div class="in">
+					<div class="cols">
+						<div class="c1">
+							<div class="mrow">
+								<span class="pill" style="background: var(--t-street)"
+									>🍢 улица / рынок</span
+								><span class="cap">Накагё · переулок</span>
+							</div>
+							<h2 class="nm2">Понтотё → Киямати → Камогава</h2>
+							<div class="jp2">先斗町・木屋町・鴨川</div>
+							<p class="ann">
+								Узкий переулок с бумажными фонарями, канал Такасэ и речные террасы
+								над Камо.
+							</p>
+							<div class="btns">
+								<a
+									class="btn"
+									href="https://www.google.com/maps/search/?api=1&amp;query=Pontocho+Alley+Kyoto"
+									target="_blank"
+									rel="noopener"
+									>📍 Открыть в Картах</a
+								>
+								<details class="loc">
+									<summary>🇯🇵 Показать местному</summary>
+									<div class="lb">
+										<div class="l1">先斗町</div>
+										<div class="l2">ぽんとちょう</div>
+										<div class="l3">Pontocho</div>
+										<div class="l4">京都</div>
+									</div>
+								</details>
+							</div>
+							<div class="strip">
+								<div>
+									<div class="k">Длина</div>
+									<div class="v">около 500 м</div>
+								</div>
+								<div>
+									<div class="k">Создан</div>
+									<div class="v">в 1670 году</div>
+								</div>
+								<div>
+									<div class="k">Террасы</div>
+									<div class="v">с начала мая</div>
+								</div>
+							</div>
+							<div class="s30">
+								<div class="cap">За 30 секунд</div>
+								<p>
+									<b>Что это</b>Квартал гейш и ресторанов вдоль реки Камо, один из
+									пяти в Киото.
+								</p>
+								<p>
+									<b>Главное</b>Узкий переулок Понтотё, канал Такасэ с улицей
+									Киямати и берег Камо.
+								</p>
+								<p>
+									<b>Не пропустите</b>Фонари с ржанкой «тидори» — эмблемой
+									квартала.
+								</p>
+							</div>
+						</div>
+						<div class="c2">
+							<div class="body">
+								<p class="drop">
+									Понтотё появился в 1670 году: берег Камо укрепили насыпью, и на
+									новой земле выросли чайные дома и постоялые дворы для лодочников
+									и путников. В начале XVIII века квартал получил статус
+									«ханамати» — квартала гейш — и остался одним из пяти таких
+									кварталов Киото.
+								</p>
+								<p>
+									Переулок тянется примерно на 500 метров между Сандзё и Сидзё,
+									местами он едва шире двух человек. Рядом течёт канал Такасэ, а
+									вдоль него идёт улица Киямати: она появилась при прокладке
+									канала в эпоху Эдо. О происхождении названия «Понтотё» до сих
+									пор спорят.
+								</p>
+								<div class="sh"><span class="cap">Террасы над рекой</span></div>
+								<p>
+									С начала мая до конца сентября рестораны на восточной стороне
+									Понтотё выносят над Камо деревянные террасы «ноурё-юка» —
+									«платформы вечерней прохлады»; в Киото их называют и «кавадоко».
+									Они стоят на опорах в нескольких метрах над водой, и многие
+									требуют бронирования заранее.
+								</p>
+								<div class="sh"><span class="cap">Камогава одори</span></div>
+								<p>
+									Каждый май в театре Понтотё-кабурэндзё гейко и майко исполняют
+									танцевальное представление «Камогава одори»; впервые оно прошло
+									в 1872 году. Здание кабурэндзё, построенное в 1927 году, стоит
+									на самом Понтотё.
+								</p>
+							</div>
+							<div class="sh"><span class="cap">История и даты</span></div>
+							<ul class="hist">
+								<li><b>1670</b> — насыпь вдоль Камо создаёт новую землю</li>
+								<li><b>XVIII в.</b> — квартал получает статус «ханамати»</li>
+								<li><b>1872</b> — первый «Камогава одори»</li>
+								<li><b>1927</b> — построен театр Понтотё-кабурэндзё</li>
+							</ul>
+							<div class="fact">
+								<div class="cap">ФАКТ: ЧТО ЗНАЧИТ «ПОНТО»</div>
+								<p>
+									Происхождение названия спорно. Одна из версий связывает его с
+									португальским словом «понто» — «точка, кончик»: так мог
+									называться мыс, намытый между Камо и Такасэ. Другие объяснения
+									тоже существуют, и точного ответа нет.
+								</p>
+							</div>
+							<div class="find">
+								<div class="cap">Найдите на месте</div>
+								<label
+									><input type="checkbox" data-k="d02-s08-1" /><span
+										>Фонари с ржанкой «тидори» — по всему переулку</span
+									></label
+								><label
+									><input type="checkbox" data-k="d02-s08-2" /><span
+										>Театр Понтотё-кабурэндзё — в северной части Понтотё</span
+									></label
+								><label
+									><input type="checkbox" data-k="d02-s08-3" /><span
+										>Канал Такасэ — у улицы Киямати, к западу от Понтотё</span
+									></label
+								>
+							</div>
+							<div class="here">
+								<div class="cap">На месте</div>
+								<ul>
+									<li>Заложите 60–90 минут вечером; остановка опциональна.</li>
+									<li>
+										Террасы в мае есть не у всех ресторанов и обычно по брони;
+										проверьте до визита.
+									</li>
+									<li>
+										Переулок жилой и узкий: не загораживайте проход и не
+										снимайте гейко и майко без разрешения.
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+			<div class="in">
+				<div class="way"><a class="back" href="#index">← Все дни</a></div>
+			</div>
+		</section>
+		<!-- DAY-02 END -->
+		<script>
+			(function () {
+				try {
+					var s = window.localStorage,
+						i = document.querySelectorAll('.find input[data-k]');
+					for (var n = 0; n < i.length; n++) {
+						(function (el) {
+							var k = 'jp27-' + el.getAttribute('data-k');
+							try {
+								if (s && s.getItem(k) === '1') el.checked = true;
+							} catch (e) {}
+							el.addEventListener('change', function () {
+								try {
+									if (s) {
+										if (el.checked) s.setItem(k, '1');
+										else s.removeItem(k);
+									}
+								} catch (e) {}
+							});
+						})(i[n]);
+					}
+				} catch (e) {}
+			})();
+		</script>
+	</body>
+</html>
